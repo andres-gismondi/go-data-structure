@@ -3,21 +3,23 @@ package BFS
 import (
 	"fmt"
 
-	"github.com/andres-gismondi/go-data-structure.git/graph"
-	"github.com/andres-gismondi/go-data-structure.git/queue"
+	"go-data-structure/graph"
+	"go-data-structure/node"
+	"go-data-structure/queue"
 )
 
-func Scan(node *graph.Node[graph.T]) {
-	visits := graph.Visits{}
-	q := queue.Queue[*graph.Node[graph.T]]{}
-	q.Enqueue(node)
+func Scan[K any](n *node.Node[K]) {
+	visits := graph.Visits[K]{}
+
+	q := queue.New[*node.Node[K]]()
+	q.Enqueue(n)
 
 	for !q.Empty() {
-		node = q.DequeueHead()
-		fmt.Printf("%v ;", node.Val)
-		visits.Add(node)
+		n = q.DequeueHead()
+		fmt.Printf("%v ;", n.Val)
+		visits.Add(n)
 
-		for _, n := range node.Nodes {
+		for _, n := range n.Nodes {
 			if !visits.WasVisited(n) {
 				q.Enqueue(n)
 			}

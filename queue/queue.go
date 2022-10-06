@@ -4,6 +4,10 @@ import "fmt"
 
 type Queue[T any] []T
 
+func New[T any]() *Queue[T] {
+	return &Queue[T]{}
+}
+
 func (q *Queue[T]) Enqueue(val T) {
 	*q = append(*q, val)
 }
@@ -33,10 +37,7 @@ func (q *Queue[T]) DequeueTail() T {
 }
 
 func (q *Queue[_]) Empty() bool {
-	if len(*q) == 0 {
-		return true
-	}
-	return false
+	return len(*q) == 0
 }
 
 func (q *Queue[_]) Print() {

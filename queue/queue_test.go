@@ -3,11 +3,11 @@ package queue_test
 import (
 	"testing"
 
-	"github.com/andres-gismondi/go-data-structure.git/queue"
+	"go-data-structure/queue"
 )
 
 func TestQueue_Int(t *testing.T) {
-	q := queue.Queue[int]{}
+	q := queue.New[int]()
 
 	q.Enqueue(1)
 	q.Enqueue(2)
@@ -24,7 +24,7 @@ func TestQueue_Int(t *testing.T) {
 }
 
 func TestQueue_String(t *testing.T) {
-	q := queue.Queue[string]{}
+	q := queue.New[string]()
 
 	q.Enqueue("a")
 	q.Enqueue("b")
@@ -45,7 +45,7 @@ type QueueStruct struct {
 }
 
 func TestQueue_Struct(t *testing.T) {
-	q := queue.Queue[QueueStruct]{}
+	q := queue.New[QueueStruct]()
 
 	q.Enqueue(QueueStruct{Name: "Q1"})
 	q.Enqueue(QueueStruct{Name: "Q2"})

@@ -3,11 +3,11 @@ package stack_test
 import (
 	"testing"
 
-	"github.com/andres-gismondi/go-data-structure.git/stack"
+	"go-data-structure/stack"
 )
 
 func TestStack_Int(t *testing.T) {
-	s := stack.Stack[int]{}
+	s := stack.New[int]()
 
 	s.Pop()
 	s.Push(1)
@@ -22,7 +22,7 @@ func TestStack_Int(t *testing.T) {
 }
 
 func TestStack_String(t *testing.T) {
-	s := stack.Stack[string]{}
+	s := stack.New[string]()
 
 	s.Pop()
 	s.Push("a")
@@ -36,18 +36,33 @@ func TestStack_String(t *testing.T) {
 	s.Print()
 }
 
-type StackStruct struct {
+type ObjectTest struct {
 	Name string
 }
 
 func TestStack_Struct(t *testing.T) {
-	s := stack.Stack[StackStruct]{}
+	s := stack.New[ObjectTest]()
 
-	s.Push(StackStruct{Name: "s1"})
-	s.Push(StackStruct{Name: "s2"})
-	s.Push(StackStruct{Name: "s3"})
-	s.Push(StackStruct{Name: "s4"})
-	s.Push(StackStruct{Name: "s5"})
+	s.Push(ObjectTest{Name: "s1"})
+	s.Push(ObjectTest{Name: "s2"})
+	s.Push(ObjectTest{Name: "s3"})
+	s.Push(ObjectTest{Name: "s4"})
+	s.Push(ObjectTest{Name: "s5"})
+	s.Print()
+	s.Pop()
+	s.Pop()
+	s.Print()
+}
+
+func TestStruct(t *testing.T) {
+	s := stack.New[int]()
+
+	s.Pop()
+	s.Push(1)
+	s.Push(2)
+	s.Push(3)
+	s.Push(4)
+	s.Push(5)
 	s.Print()
 	s.Pop()
 	s.Pop()

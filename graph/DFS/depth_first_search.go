@@ -3,15 +3,16 @@ package DFS
 import (
 	"fmt"
 
-	"github.com/andres-gismondi/go-data-structure.git/graph"
+	"go-data-structure/graph"
+	"go-data-structure/node"
 )
 
-func Scan(node *graph.Node[graph.T]) {
-	visits := graph.Visits{}
-	dfs(node, visits)
+func Scan[K any](node *node.Node[K]) {
+	visits := graph.Visits[K]{}
+	dfs(node, &visits)
 }
 
-func dfs(node *graph.Node[graph.T], visits graph.Visits) {
+func dfs[K any](node *node.Node[K], visits *graph.Visits[K]) {
 	if visits.WasVisited(node) {
 		return
 	}
