@@ -5,10 +5,10 @@ type Node[T any] struct {
 	Nodes []*Node[T]
 }
 
-func New[T any](val T) *Node[T] {
+func New[T any](val T, cap int) *Node[T] {
 	return &Node[T]{
 		Val:   val,
-		Nodes: make([]*Node[T], 0),
+		Nodes: make([]*Node[T], cap, cap),
 	}
 }
 

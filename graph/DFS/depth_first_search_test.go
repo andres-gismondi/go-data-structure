@@ -50,21 +50,3 @@ func TestDFS_success(t *testing.T) {
 
 	DFS.Scan(nodeAndres)
 }
-
-/*
-func TestDFS_circle(t *testing.T) {
-	a := graph.New("a")
-	b := graph.New("b")
-	c := graph.New("c")
-	d := graph.New("d")
-
-	c.AddAndConnect(c)
-
-	a.AddAndConnect(c)
-	a.AddAndConnect(b)
-
-	b.AddAndConnect(c)
-	b.AddAndConnect(d)
-
-	DFS.Scan(a)
-}*/

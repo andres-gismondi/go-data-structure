@@ -11,7 +11,7 @@ func New[K any]() *Graph[K] {
 }
 
 func (g *Graph[K]) AddNode(value K) {
-	nde := node.New(value)
+	nde := node.New[K](value, 0)
 	g.Nodes = append(g.Nodes, nde)
 }
 
@@ -22,7 +22,7 @@ func (g *Graph[K]) Connect(node *node.Node[K], f func(nn, nValue *node.Node[K]))
 }
 
 func (g *Graph[K]) AddAndConnect(value K, f func(nn, nValue *node.Node[K])) {
-	nde := node.New(value)
+	nde := node.New[K](value, 0)
 
 	g.Nodes = append(g.Nodes, nde)
 	if len(g.Nodes) == 1 {

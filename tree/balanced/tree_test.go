@@ -3,13 +3,22 @@ package balanced_test
 import (
 	"testing"
 
-	"github.com/andres-gismondi/go-data-structure.git/tree/balanced"
+	"go-data-structure/tree/balanced"
 )
 
 func TestBalancedTree(t *testing.T) {
-	tres := balanced.Tree{}
-	tres.AddNode(5)
-	tres.AddNode(2)
-	tres.AddNode(6)
-	tres.Print()
+	tr := balanced.New[int]()
+
+	tr.AddNode(5)
+	tr.AddNode(2)
+	tr.AddNode(6)
+
+	tr.AddNode(8)
+	tr.AddNode(10)
+
+	tr.AddNode(1)
+	tr.AddNode(2)
+	tr.AddNode(4)
+
+	tr.Print()
 }

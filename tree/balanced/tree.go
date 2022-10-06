@@ -1,63 +1,65 @@
 package balanced
 
-import "fmt"
+import (
+	"fmt"
 
-// Balanced Tree is binary tree
-// We only need a Node
-// I create a slice type to manage all the nodes we append
-type T any
-type Node[T any] struct {
-	Value T
-	Nodes []*Node[T]
+	"go-data-structure/node"
+	t "go-data-structure/tree"
+)
+
+type Item interface {
+	int | string
 }
 
-func (n *Node[T]) AddNode(node *Node[T]) {
-	n.Nodes = append(n.Nodes, node)
+type tree[T Item] struct {
+	Root *node.Node[T]
 }
 
-type Tree struct {
-	Root *Node[int]
+func New[T Item]() t.Tree[T] {
+	return &tree[T]{}
 }
 
-func (t *Tree) AddNode(val int) {
-	node := &Node[int]{Value: val}
+func (t *tree[T]) AddNode(val T) {
+	n := node.New[T](val, 2)
 	if t.Root == nil {
-		t.Root = node
+		t.Root = n
 		return
 	}
 
-	t.add(t.Root, node)
+	t.add(t.Root, n)
 }
 
-func (t *Tree) add(node, appendedNode *Node[int]) {
-	// base case when we are in the last node
-	if node.Nodes == nil {
-		node.AddNode(appendedNode)
-		return
-	}
-
-	// value is uppermore than actual node we go to right
-	if appendedNode.Value > node.Value {
+func (t *tree[T]) add(node, appendedNode *node.Node[T]) {
+	// value is uppermore than actual node then we go to right
+	if appendedNode.Val > node.Val {
+		if node.Nodes[1] == nil {
+			node.Nodes[1] = appendedNode
+			return
+		}
 		t.add(node.Nodes[1], appendedNode)
 	}
 
-	// value is lower than actual node we go to left
-	if appendedNode.Value < node.Value {
+	// value is lower than actual node then we go to left
+	if appendedNode.Val < node.Val {
+		if node.Nodes[0] == nil {
+			node.Nodes[0] = appendedNode
+			return
+		}
 		t.add(node.Nodes[0], appendedNode)
 	}
 }
 
-func (t *Tree) Print() {
+func (t *tree[_]) Print() {
 	t.print(t.Root)
 }
 
-func (t *Tree) print(node *Node[int]) {
-	if node.Nodes == nil {
-		fmt.Printf("%v ;", node.Value)
+func (t *tree[T]) print(node *node.Node[T]) {
+	if node == nil {
 		return
 	}
-
+	fmt.Printf("%v ;", node.Val)
 	for _, n := range node.Nodes {
+
 		t.print(n)
 	}
 }
